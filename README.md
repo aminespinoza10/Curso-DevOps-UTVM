@@ -14,4 +14,5 @@ Hola, Ya clone el repo soy Emiliano
 Hola, mundo! Soy Kris y ya tengo acceso al repositorio
 
 Hola, soy Caro y ya clone el repo
+Ya clone el repo
 >>>>>>> 0a2a73aee0a4e6d522c166c1adf80a8a6ff0f6c3
