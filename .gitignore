@@ -1,0 +1,3 @@
+#Eliminar carpetas de compilación de .NET
+bin/
+obj/
