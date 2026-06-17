@@ -1,0 +1,6 @@
+@API_Kris_HostAddress = http://localhost:5199
+
+GET {{API_Kris_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
