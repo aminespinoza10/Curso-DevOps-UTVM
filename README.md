@@ -15,4 +15,8 @@ Hola, soy Caro y ya clone el repo
 
 Ya clone el repo
 hola soy cuik
+
 Yolanda
+
+Hola, Soy Israel y ya tengo acceso a este repo
+
