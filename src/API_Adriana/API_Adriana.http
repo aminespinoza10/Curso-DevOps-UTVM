@@ -1,0 +1,6 @@
+@API_Adriana_HostAddress = http://localhost:5130
+
+GET {{API_Adriana_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
