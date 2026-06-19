@@ -18,5 +18,6 @@ hola soy cuik
 
 Yolanda
 
-Hola, Soy Israel y ya tengo acceso a este repo
+Hola, Soy Israel y ya cloné el repo
+
 
