@@ -2,22 +2,9 @@
 
 Repositorio hecho para el curso de DevOps
 
-Hola, soy Amin y ya tengo acceso a este repo
-Hola, este es mi commit desde VS Code
+Métodos incluidos en mi API
 
-Hola soy adri ya estoy dentro
-
-Hola, mundo! Soy Kris y ya tengo acceso al repositorio
-
-Hola, Ya clone el repo soy Emiliano
-
-Hola, soy Caro y ya clone el repo
-
-Ya clone el repo
-hola soy cuik
-
-Yolanda
-
-Hola, Soy Israel y ya cloné el repo
-
+|Endpoint|Funcion|
+|--------|-------|
+|/api/aminespinoza|Resuelve el problema 1 de Project Euler|
 
