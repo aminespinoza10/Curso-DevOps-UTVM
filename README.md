@@ -7,3 +7,4 @@ Métodos incluidos en mi API
 |Endpoint|Funcion|
 |--------|-------|
 |/api/aminespinoza|Resuelve el problema 1 de Project Euler|
+|/api/emiliano|Obten el factorial del numero 10|
