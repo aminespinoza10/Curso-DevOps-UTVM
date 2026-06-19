@@ -46,6 +46,18 @@ app.MapGet("/api/emiliano", () =>
     };
 });
 
+app.MapGet("/api/Carolina", (string texto = "") =>
+{
+    var count = texto?.Length ?? 0;
+
+    return new
+    {
+        Problem = "Contador de caracteres",
+        Description = "Cuenta el número de caracteres en una cadena de texto",
+        Result = count
+    };
+});
+
 app.MapGet("/api/krizamudio", () =>
 {
     int count = 10;
@@ -155,5 +167,8 @@ static string ConvertToRoman(int value)
 
     return result.ToString();
 }
+
+
+
 
 app.Run();
