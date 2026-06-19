@@ -84,5 +84,19 @@ app.MapGet("/api/krizamudio", () =>
 });
 
 
+app.MapGet("/api/Yolanda", () =>
+{
+    var oddNumbers = Enumerable.Range(1, 40)
+        .Where(n => n % 2 == 1)
+        .Take(20)
+        .ToArray();
+
+    return new
+    {
+        Problem = "Números impares",
+        Description = "Primeros 20 números impares",
+        Result = oddNumbers
+    };
+});
 
 app.Run();
