@@ -1,6 +1,0 @@
-@API_Emiliano_HostAddress = http://localhost:5251
-
-GET {{API_Emiliano_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

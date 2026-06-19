@@ -1,6 +1,0 @@
-@API_Dulce_HostAddress = http://localhost:5259
-
-GET {{API_Dulce_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
