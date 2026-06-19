@@ -30,4 +30,20 @@ app.MapGet("/api/aminespinoza", () =>
     };
 });
 
+app.MapGet("/api/emiliano", () =>
+{
+    long factorial = 1;
+    for (int i = 1; i <= 10; i++)
+    {
+        factorial *= i;
+    }
+
+    return new
+    {
+        Problem = "Factorial",
+        Description = "Factorial de 10",
+        Result = factorial
+    };
+});
+
 app.Run();
