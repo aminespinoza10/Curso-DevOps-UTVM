@@ -99,4 +99,61 @@ app.MapGet("/api/Yolanda", () =>
     };
 });
 
+
+app.MapGet("/api/romano", (int number) =>
+{
+    if (number <= 0 || number > 3999)
+    {
+        return Results.BadRequest(new
+        {
+            Problem = "Conversión a romano",
+            Description = "Convierte un número entero a numeral romano (1-3999)",
+            Input = number,
+            Error = "El número debe estar entre 1 y 3999"
+        });
+    }
+
+    return Results.Ok(new
+    {
+        Problem = "Conversión a romano",
+        Description = "Convierte un número entero a numeral romano",
+        Number = number,
+        Roman = ConvertToRoman(number)
+    });
+});
+
+static string ConvertToRoman(int value)
+{
+    var map = new (int Value, string Symbol)[]
+    {
+        (1000, "M"),
+        (900, "CM"),
+        (500, "D"),
+        (400, "CD"),
+        (100, "C"),
+        (90, "XC"),
+        (50, "L"),
+        (40, "XL"),
+        (10, "X"),
+        (9, "IX"),
+        (5, "V"),
+        (4, "IV"),
+        (1, "I")
+    };
+
+    var result = new System.Text.StringBuilder();
+    var remaining = value;
+
+    foreach (var (digitValue, symbol) in map)
+    {
+        while (remaining >= digitValue)
+        {
+            result.Append(symbol);
+            remaining -= digitValue;
+        }
+    }
+
+    return result.ToString();
+}
+
 app.Run();

@@ -10,3 +10,4 @@ Métodos incluidos en mi API
 |/api/emiliano|Obten el factorial del numero 10|
 |/api/kris|Sumar 10 primeros numeros primos|
 |/api/yolanda|Imprmir 20 numeros pares|
+|/api/Adriana|Convierte un número entero a numeral romano|
