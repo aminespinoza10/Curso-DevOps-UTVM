@@ -46,4 +46,43 @@ app.MapGet("/api/emiliano", () =>
     };
 });
 
+app.MapGet("/api/krizamudio", () =>
+{
+    int count = 10;
+    int found = 0;
+    int num = 2;
+    long sum = 0;
+
+    static bool IsPrime(int n)
+    {
+        if (n <= 1) return false;
+        if (n <= 3) return true;
+        if (n % 2 == 0) return false;
+        for (int i = 3; i * i <= n; i += 2)
+        {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+
+    while (found < count)
+    {
+        if (IsPrime(num))
+        {
+            sum += num;
+            found++;
+        }
+        num++;
+    }
+
+    return new
+    {
+        Problem = "Suma de primos",
+        Description = "Suma de los primeros 10 números primos",
+        Result = sum
+    };
+});
+
+
+
 app.Run();
