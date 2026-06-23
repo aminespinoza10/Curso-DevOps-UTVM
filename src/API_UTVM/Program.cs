@@ -28,6 +28,7 @@ app.MapGet("/api/aminespinoza", () =>
 
 app.MapGet("/api/emiliano", () =>
 {
+    //Esta aplicacion hace lo que quieras
     long factorial = 1;
     for (int i = 1; i <= 10; i++)
     {
