@@ -10,7 +10,6 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    working-directory: src/API_UTVM
 
     steps:
     - name: Checkout repository
@@ -22,11 +21,14 @@ jobs:
         dotnet-version: 10.0.x
 
     - name: Restore dependencies
+      working-directory: src/API_UTVM
       run: dotnet restore
 
     - name: Build
+      working-directory: src/API_UTVM
       run: dotnet build --configuration Release --no-restore
 
     - name: Build Docker NET image
+      working-directory: src/API_UTVM
       run: |
         docker build --platform linux --tag $IMAGE_BASE_NAME .
