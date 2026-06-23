@@ -165,7 +165,6 @@ static string ConvertToRoman(int value)
     return result.ToString();
 }
 
-
-
-
 app.Run();
+
+public partial class Program { }
