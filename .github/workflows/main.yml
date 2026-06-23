@@ -28,6 +28,10 @@ jobs:
       working-directory: src/API_UTVM
       run: dotnet build --configuration Release --no-restore
 
+    - name: Test
+      working-directory: src/API_UTVM.Tests
+      run: dotnet test --no-build --verbosity normal
+
     - name: Build Docker NET image
       working-directory: src/API_UTVM
       run: |
