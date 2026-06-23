@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_UTVM", "API_UTVM\API_UTVM.csproj", "{5A05C213-049C-406E-8927-72ED80447EEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API_UTVM.Tests", "API_UTVM.Tests\API_UTVM.Tests.csproj", "{EC2CD882-F2B4-4B99-B7F7-482538953F48}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A05C213-049C-406E-8927-72ED80447EEB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A05C213-049C-406E-8927-72ED80447EEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A05C213-049C-406E-8927-72ED80447EEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A05C213-049C-406E-8927-72ED80447EEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC2CD882-F2B4-4B99-B7F7-482538953F48}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC2CD882-F2B4-4B99-B7F7-482538953F48}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC2CD882-F2B4-4B99-B7F7-482538953F48}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC2CD882-F2B4-4B99-B7F7-482538953F48}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
