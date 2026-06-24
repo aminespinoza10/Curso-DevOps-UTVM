@@ -47,42 +47,54 @@ public class AminespinozaEndpointTests : IClassFixture<WebApplicationFactory<Pro
     }
 }
 
-public class EmilianoEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+public class KrizamudioEndpointTests : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly WebApplicationFactory<Program> _factory;
 
-    public EmilianoEndpointTests(WebApplicationFactory<Program> factory)
+    public KrizamudioEndpointTests(WebApplicationFactory<Program> factory)
     {
         _factory = factory;
     }
 
     [Fact]
-    public async Task GetEmilianoEndpoint_ReturnsCorrectFactorial()
+    public async Task GetKrizamudioEndpoint_ReturnsCorrectResult()
     {
         var client = _factory.CreateClient();
-        var response = await client.GetAsync("/api/emiliano");
+        var response = await client.GetAsync("/api/krizamudio");
 
         Assert.True(response.IsSuccessStatusCode);
 
         var jsonString = await response.Content.ReadAsStringAsync();
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
         using var document = JsonDocument.Parse(jsonString);
         var root = document.RootElement;
 
+        // Properties should be case-insensitive
         Assert.True(root.TryGetProperty("Problem", out var problemProp) || root.TryGetProperty("problem", out problemProp));
         Assert.True(root.TryGetProperty("Description", out var descProp) || root.TryGetProperty("description", out descProp));
         Assert.True(root.TryGetProperty("Result", out var resultProp) || root.TryGetProperty("result", out resultProp));
-
-        Assert.Equal("Factorial", problemProp.GetString());
-        Assert.Equal("Factorial de 10", descProp.GetString());
-        Assert.Equal(3628800, resultProp.GetInt64());
+        
+        Assert.Equal("Suma de primos", problemProp.GetString());
+        Assert.Equal("Suma de los primeros 10 números primos", descProp.GetString());
+        // Sum of first 10 primes: 2+3+5+7+11+13+17+19+23+29 = 129
+        Assert.Equal(129, resultProp.GetInt32());
     }
 
     [Fact]
-    public async Task GetEmilianoEndpoint_ReturnsJsonContentType()
+    public async Task GetKrizamudioEndpoint_ReturnsJsonContentType()
     {
         var client = _factory.CreateClient();
-        var response = await client.GetAsync("/api/emiliano");
+        var response = await client.GetAsync("/api/krizamudio");
 
         Assert.Equal("application/json", response.Content.Headers.ContentType?.MediaType);
+    }
+
+    [Fact]
+    public async Task GetKrizamudioEndpoint_ReturnsOkStatus()
+    {
+        var client = _factory.CreateClient();
+        var response = await client.GetAsync("/api/krizamudio");
+
+        Assert.Equal(System.Net.HttpStatusCode.OK, response.StatusCode);
     }
 }
