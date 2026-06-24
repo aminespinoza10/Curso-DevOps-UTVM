@@ -98,3 +98,37 @@ public class KrizamudioEndpointTests : IClassFixture<WebApplicationFactory<Progr
         Assert.Equal(System.Net.HttpStatusCode.OK, response.StatusCode);
     }
 }
+
+public class RomanoEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+{
+    private readonly WebApplicationFactory<Program> _factory;
+
+    public RomanoEndpointTests(WebApplicationFactory<Program> factory)
+    {
+        _factory = factory;
+    }
+
+    [Fact]
+    public async Task GetRomanoEndpoint_ReturnsCorrectRomanNumeral()
+    {
+        var client = _factory.CreateClient();
+        var response = await client.GetAsync("/api/romano?number=1987");
+
+        Assert.Equal(System.Net.HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal("application/json", response.Content.Headers.ContentType?.MediaType);
+
+        var jsonString = await response.Content.ReadAsStringAsync();
+        using var document = JsonDocument.Parse(jsonString);
+        var root = document.RootElement;
+
+        Assert.True(root.TryGetProperty("Problem", out var problemProp) || root.TryGetProperty("problem", out problemProp));
+        Assert.True(root.TryGetProperty("Description", out var descProp) || root.TryGetProperty("description", out descProp));
+        Assert.True(root.TryGetProperty("Number", out var numberProp) || root.TryGetProperty("number", out numberProp));
+        Assert.True(root.TryGetProperty("Roman", out var romanProp) || root.TryGetProperty("roman", out romanProp));
+
+        Assert.Equal("Conversión a romano", problemProp.GetString());
+        Assert.Equal("Convierte un número entero a numeral romano", descProp.GetString());
+        Assert.Equal(1987, numberProp.GetInt32());
+        Assert.Equal("MCMLXXXVII", romanProp.GetString());
+    }
+}
