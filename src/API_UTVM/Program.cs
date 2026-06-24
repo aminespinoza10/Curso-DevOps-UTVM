@@ -131,6 +131,20 @@ app.MapGet("/api/romano", (int number) =>
     });
 });
 
+app.MapGet("/api/cuitlahuac", (int a, int b) =>
+{
+    var sum = a + b;
+
+    return Results.Ok(new
+    {
+        Problem = "Verificación de suma",
+        Description = "Verifica la suma de dos números",
+        Input = new { A = a, B = b },
+        Sum = sum,
+        Verified = true
+    });
+});
+
 static string ConvertToRoman(int value)
 {
     var map = new (int Value, string Symbol)[]
