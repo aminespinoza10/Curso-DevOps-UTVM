@@ -45,4 +45,34 @@ public class AminespinozaEndpointTests : IClassFixture<WebApplicationFactory<Pro
 
         Assert.Equal("application/json", response.Content.Headers.ContentType?.MediaType);
     }
+
+    [Fact]
+    public async Task GetCuitlahuacEndpoint_ReturnsFirst20EvenNumbers()
+    {
+        var client = _factory.CreateClient();
+        var response = await client.GetAsync("/api/cuitlahuac");
+
+        Assert.True(response.IsSuccessStatusCode);
+        Assert.Equal("application/json", response.Content.Headers.ContentType?.MediaType);
+
+        var jsonString = await response.Content.ReadAsStringAsync();
+        using var document = JsonDocument.Parse(jsonString);
+        var root = document.RootElement;
+
+        Assert.True(root.TryGetProperty("Problem", out var problemProp) || root.TryGetProperty("problem", out problemProp));
+        Assert.True(root.TryGetProperty("Description", out var descProp) || root.TryGetProperty("description", out descProp));
+        Assert.True(root.TryGetProperty("Result", out var resultProp) || root.TryGetProperty("result", out resultProp));
+
+        Assert.Equal("Números pares", problemProp.GetString());
+        Assert.Equal("Primeros 20 números pares", descProp.GetString());
+        Assert.Equal(JsonValueKind.Array, resultProp.ValueKind);
+
+        var expected = new int[] { 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40 };
+        Assert.Equal(expected.Length, resultProp.GetArrayLength());
+
+        for (int i = 0; i < expected.Length; i++)
+        {
+            Assert.Equal(expected[i], resultProp[i].GetInt32());
+        }
+    }
 }

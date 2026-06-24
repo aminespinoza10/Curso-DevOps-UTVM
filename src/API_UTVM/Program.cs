@@ -108,6 +108,20 @@ app.MapGet("/api/Yolanda", () =>
     };
 });
 
+app.MapGet("/api/cuitlahuac", () =>
+{
+    var evenNumbers = Enumerable.Range(1, 40)
+        .Where(n => n % 2 == 0)
+        .Take(20)
+        .ToArray();
+
+    return new
+    {
+        Problem = "Números pares",
+        Description = "Primeros 20 números pares",
+        Result = evenNumbers
+    };
+});
 
 app.MapGet("/api/romano", (int number) =>
 {
