@@ -47,6 +47,52 @@ public class AminespinozaEndpointTests : IClassFixture<WebApplicationFactory<Pro
     }
 }
 
+public class CuitlahuacEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+{
+    private readonly WebApplicationFactory<Program> _factory;
+
+    public CuitlahuacEndpointTests(WebApplicationFactory<Program> factory)
+    {
+        _factory = factory;
+    }
+
+    [Fact]
+    public async Task GetCuitlahuacEndpoint_ReturnsSumResult()
+    {
+        var client = _factory.CreateClient();
+        var response = await client.GetAsync("/api/cuitlahuac?a=5&b=7");
+
+        Assert.Equal(System.Net.HttpStatusCode.OK, response.StatusCode);
+        Assert.Equal("application/json", response.Content.Headers.ContentType?.MediaType);
+
+        var jsonString = await response.Content.ReadAsStringAsync();
+        using var document = JsonDocument.Parse(jsonString);
+        var root = document.RootElement;
+
+        static JsonElement GetJsonProperty(JsonElement element, string name)
+        {
+            if (element.TryGetProperty(name, out var property))
+            {
+                return property;
+            }
+
+            var camelCaseName = char.ToLowerInvariant(name[0]) + name.Substring(1);
+            if (element.TryGetProperty(camelCaseName, out property))
+            {
+                return property;
+            }
+
+            throw new KeyNotFoundException($"Property '{name}' not found in JSON response.");
+        }
+
+        Assert.Equal(12, GetJsonProperty(root, "Sum").GetInt32());
+        Assert.True(GetJsonProperty(root, "Verified").GetBoolean());
+        var input = GetJsonProperty(root, "Input");
+        Assert.Equal(5, GetJsonProperty(input, "A").GetInt32());
+        Assert.Equal(7, GetJsonProperty(input, "B").GetInt32());
+    }
+}
+
 public class KrizamudioEndpointTests : IClassFixture<WebApplicationFactory<Program>>
 {
     private readonly WebApplicationFactory<Program> _factory;
