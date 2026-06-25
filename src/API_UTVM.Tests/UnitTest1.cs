@@ -178,3 +178,54 @@ public class RomanoEndpointTests : IClassFixture<WebApplicationFactory<Program>>
         Assert.Equal("MCMLXXXVII", romanProp.GetString());
     }
 }
+public class YolandaEndpointTests : IClassFixture<WebApplicationFactory<Program>>
+{
+    private readonly WebApplicationFactory<Program> _factory;
+
+    public YolandaEndpointTests(WebApplicationFactory<Program> factory)
+    {
+        _factory = factory;
+    }
+
+    [Fact]
+    public async Task GetYolandaEndpoint_ReturnsOddNumbers()
+    {
+        var client = _factory.CreateClient();
+        var response = await client.GetAsync("/api/Yolanda");
+
+        Assert.True(response.IsSuccessStatusCode);
+
+        var jsonString = await response.Content.ReadAsStringAsync();
+        var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+        using var document = JsonDocument.Parse(jsonString);
+        var root = document.RootElement;
+
+        // Validate properties
+        Assert.True(root.TryGetProperty("Problem", out var problemProp) || root.TryGetProperty("problem", out problemProp));
+        Assert.True(root.TryGetProperty("Description", out var descProp) || root.TryGetProperty("description", out descProp));
+        Assert.True(root.TryGetProperty("Result", out var resultProp) || root.TryGetProperty("result", out resultProp));
+
+        Assert.Equal("Números impares", problemProp.GetString());
+        Assert.Equal("Primeros 20 números impares", descProp.GetString());
+
+        // Validate the array of odd numbers
+        var resultArray = resultProp.EnumerateArray().Select(x => x.GetInt32()).ToArray();
+        Assert.Equal(20, resultArray.Length);
+
+        var expectedOddNumbers = Enumerable.Range(1, 40)
+            .Where(n => n % 2 == 1)
+            .Take(20)
+            .ToArray();
+
+        Assert.Equal(expectedOddNumbers, resultArray);
+    }
+
+    [Fact]
+    public async Task GetYolandaEndpoint_ReturnsJsonContentType()
+    {
+        var client = _factory.CreateClient();
+        var response = await client.GetAsync("/api/Yolanda");
+
+        Assert.Equal("application/json", response.Content.Headers.ContentType?.MediaType);
+    }
+}
