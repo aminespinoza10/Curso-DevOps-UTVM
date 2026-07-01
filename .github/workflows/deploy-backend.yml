@@ -7,6 +7,7 @@ on:
   workflow_dispatch: 
 
 env:
+  SERVICE_NAME: apiutvm
   IMAGE_BASE_NAME: aminespinoza/utvm:latest
   ENVIRONMENT_NAME: UTV-container-app-env
   RESOURCE_GROUP: infra-UTVM
@@ -45,5 +46,10 @@ jobs:
       - name: Publish Docker Backend image
         run: |
           docker push $IMAGE_BASE_NAME
+
+      - name: Deploy Backend container App
+        run: |          
+          az containerapp up --name "$SERVICE_NAME" --resource-group $RESOURCE_GROUP --environment $ENVIRONMENT_NAME --target-port 8080 --image $IMAGE_BASE_NAME
+          az containerapp ingress enable -n "$SERVICE_NAME" -g $RESOURCE_GROUP --type external --target-port 8080 --transport auto
 
           
