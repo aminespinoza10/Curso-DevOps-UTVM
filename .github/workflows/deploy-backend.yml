@@ -1,0 +1,29 @@
+name: Deploy backend application
+
+on:
+  push:
+    branches: ["main"]
+
+  workflow_dispatch: 
+
+env:
+  IMAGE_BASE_NAME: minespinoza/utvm:latest
+  ENVIRONMENT_NAME: UTV-container-app-env
+  RESOURCE_GROUP: infra-UTVM
+
+jobs:
+  UTVMBackend:
+    name: Crear backend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/API_UTVM
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Azure Login
+        uses: Azure/login@v1.4.6
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }} 
