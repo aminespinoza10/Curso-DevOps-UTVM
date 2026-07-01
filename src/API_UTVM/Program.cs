@@ -26,6 +26,28 @@ app.MapGet("/api/aminespinoza", () =>
     };
 });
 
+app.MapGet("/api/utvm", () =>
+{
+    int n = 10;
+    long fibonacci1 = 0, fibonacci2 = 1, fibonacciNext;
+    var fibonacciSequence = new List<long> { fibonacci1, fibonacci2 };
+
+    for (int i = 2; i < n; i++)
+    {
+        fibonacciNext = fibonacci1 + fibonacci2;
+        fibonacciSequence.Add(fibonacciNext);
+        fibonacci1 = fibonacci2;
+        fibonacci2 = fibonacciNext;
+    }
+
+    return new
+    {
+        Problem = "Fibonacci",
+        Description = "Genera los primeros 10 números de la secuencia de Fibonacci",
+        Result = fibonacciSequence
+    };
+});
+
 app.MapGet("/api/emiliano", () =>
 {
     //Esta aplicacion hace lo que quieras
